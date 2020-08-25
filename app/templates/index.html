@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<h1>Hello, {{ current_user.username }}!</h1>
+
+{% if form %}
+<form action="" method="post">
+    {{ form.hidden_tag() }}
+
+    <p>
+        {{ form.post.label }}<br>
+        {{ form.post(cols=32, rows=4) }}
+        {% for error in form.post.errors %}
+            <span class="form-error">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.submit() }}
+    </p>
+</form>
+{% endif %}
+
+{% for post in posts %}
+    {% include "include/_post.html" %}
+{% endfor %}
+
+{% include "include/_page_urls.html" %}
+
+{% endblock %}
